@@ -1,17 +1,29 @@
 {
-    "require": {
-        "symfony/console": "^3.4",
-        "google/apiclient": "^2.0",
-        "twilio/sdk": "^5.28",
-        "smalot/pdfparser": "*",
-        "knplabs/gaufrette": "0.9.0",
-        "gaufrette/azure-blob-storage-adapter": "^0.6.0",
-        "gaufrette/ftp-adapter": "^0.4.0",
-        "onelogin/php-saml": "^3.4",
-        "laminas/laminas-cache": "^2.9",
-        "laminas/laminas-serializer": "^2.9",
-        "sabre/dav": "~4.1.3",
-        "greenlion/php-sql-parser": "^4.3",
-        "monolog/monolog": "^2.2"
-    }
+	"name": "corebos/cbreview",
+	"type": "corebos-module",
+	"properties": {
+		"name": "Revision and Reviews module",
+		"description": "Simple registration module to record revision details, conclusions and comments",
+		"keywords": ["revision","quotes","potentials"],
+		"homepage": "http://corebos.org/documentation/doku.php?id=en:extensions:extensions:cbreview",
+		"version": "1.0",
+		"time": "2021-03-29",
+		"license": "Vizsage",
+		"extra": {
+			"price": "0",
+			"distribution": "Free"
+		},
+		"authors": [
+			{
+				"name": "JPL TSolucio, S.L.",
+				"email": "info(at)tsolucio(dot)com"
+			}
+		],
+		"support": {
+			"email": "info(at)tsolucio(dot)com",
+			"issues": "https://github.com/coreBOS/cbReview",
+			"forum": "http://discussions.corebos.org/",
+			"source": "https://github.com/coreBOS/cbReview"
+		}
+	}
 }
