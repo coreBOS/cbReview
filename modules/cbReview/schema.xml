@@ -1,0 +1,26 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vtiger_cbreview</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_cbreview` (
+  `cbreviewid` int(11) NOT NULL,
+  `whyreview` varchar(255) DEFAULT NULL,
+  `reviewitno` varchar(255) DEFAULT NULL,
+  `whoreview` int(11) DEFAULT NULL,
+  `whenreview` date NOT NULL,
+  `reviewresulttype` varchar(255) DEFAULT NULL,
+  `whatreview` int(11) DEFAULT NULL,
+  PRIMARY KEY (`cbreviewid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+]]></sql>
+		</table>
+		<table>
+			<name>vtiger_cbreviewcf</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_cbreviewcf` (
+  `cbreviewid` int(11) NOT NULL,
+  PRIMARY KEY (`cbreviewid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+	</tables>
+</schema>
