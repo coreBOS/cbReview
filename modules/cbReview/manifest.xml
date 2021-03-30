@@ -214,7 +214,7 @@
 <readonly>1</readonly>
 <presence>0</presence>
 <selected>0</selected>
-<sequence>10</sequence>
+<sequence>7</sequence>
 <maximumlength>100</maximumlength>
 <typeofdata>V~M</typeofdata>
 <quickcreate>1</quickcreate>
@@ -234,7 +234,7 @@
 <readonly>1</readonly>
 <presence>0</presence>
 <selected>0</selected>
-<sequence>11</sequence>
+<sequence>8</sequence>
 <maximumlength>100</maximumlength>
 <typeofdata>V~O</typeofdata>
 <quickcreate>3</quickcreate>
@@ -254,7 +254,7 @@
 <readonly>1</readonly>
 <presence>0</presence>
 <selected>0</selected>
-<sequence>12</sequence>
+<sequence>9</sequence>
 <maximumlength>100</maximumlength>
 <typeofdata>DT~O</typeofdata>
 <quickcreate>3</quickcreate>
@@ -274,7 +274,7 @@
 <readonly>1</readonly>
 <presence>0</presence>
 <selected>0</selected>
-<sequence>13</sequence>
+<sequence>10</sequence>
 <maximumlength>100</maximumlength>
 <typeofdata>DT~O</typeofdata>
 <quickcreate>3</quickcreate>

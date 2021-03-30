@@ -18,7 +18,7 @@ class cbReview extends CRMEntity {
 	/** Indicator if this is a custom module or standard module */
 	public $IsCustomModule = true;
 	public $HasDirectImageField = false;
-	public $moduleIcon = array('library' => 'standard', 'containerClass' => 'slds-icon_container slds-icon-standard-account', 'class' => 'slds-icon', 'icon'=>'account');
+	public $moduleIcon = array('library' => 'standard', 'containerClass' => 'slds-icon_container slds-icon-standard-approval', 'class' => 'slds-icon', 'icon'=>'approval');
 
 	/**
 	 * Mandatory table for supporting custom fields.
@@ -51,8 +51,8 @@ class cbReview extends CRMEntity {
 	public $list_fields = array(
 		/* Format: Field Label => array(tablename => columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Why'=> array('cbreview' => 'whyreview'),
 		'Review No'=> array('cbreview' => 'reviewitno'),
+		'Why'=> array('cbreview' => 'whyreview'),
 		'Who'=> array('cbreview' => 'whoreview'),
 		'When'=> array('cbreview' => 'whenreview'),
 		'What'=> array('cbreview' => 'whatreview'),
@@ -61,8 +61,8 @@ class cbReview extends CRMEntity {
 	);
 	public $list_fields_name = array(
 		/* Format: Field Label => fieldname */
-		'Why'=> 'whyreview',
 		'Review No'=> 'reviewitno',
+		'Why'=> 'whyreview',
 		'Who'=> 'whoreview',
 		'When'=> 'whenreview',
 		'What'=> 'whatreview',
@@ -71,14 +71,14 @@ class cbReview extends CRMEntity {
 	);
 
 	// Make the field link to detail view from list view (Fieldname)
-	public $list_link_field = 'whyreview';
+	public $list_link_field = 'reviewitno';
 
 	// For Popup listview and UI type support
 	public $search_fields = array(
 		/* Format: Field Label => array(tablename => columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Why'=> array('cbreview' => 'whyreview'),
 		'Review No'=> array('cbreview' => 'reviewitno'),
+		'Why'=> array('cbreview' => 'whyreview'),
 		'Who'=> array('cbreview' => 'whoreview'),
 		'When'=> array('cbreview' => 'whenreview'),
 		'What'=> array('cbreview' => 'whatreview'),
@@ -87,8 +87,8 @@ class cbReview extends CRMEntity {
 	);
 	public $search_fields_name = array(
 		/* Format: Field Label => fieldname */
-		'Why'=> 'whyreview',
 		'Review No'=> 'reviewitno',
+		'Why'=> 'whyreview',
 		'Who'=> 'whoreview',
 		'When'=> 'whenreview',
 		'What'=> 'whatreview',
@@ -97,28 +97,28 @@ class cbReview extends CRMEntity {
 	);
 
 	// For Popup window record selection
-	public $popup_fields = array('whyreview');
+	public $popup_fields = array('reviewitno');
 
 	// Placeholder for sort fields - All the fields will be initialized for Sorting through initSortFields
 	public $sortby_fields = array();
 
 	// For Alphabetical search
-	public $def_basicsearch_col = 'whyreview';
+	public $def_basicsearch_col = 'reviewitno';
 
 	// Column value to use on detail view record text display
-	public $def_detailview_recname = 'whyreview';
+	public $def_detailview_recname = 'reviewitno';
 
 	// Required Information for enabling Import feature
-	public $required_fields = array('whyreview'=>1);
+	public $required_fields = array('reviewitno'=>1);
 
 	// Callback function list during Importing
 	public $special_functions = array('set_import_assigned_user');
 
-	public $default_order_by = 'whyreview';
+	public $default_order_by = 'reviewitno';
 	public $default_sort_order='ASC';
 	// Used when enabling/disabling the mandatory fields for the module.
 	// Refers to vtiger_field.fieldname values.
-	public $mandatory_fields = array('createdtime', 'modifiedtime', 'whyreview');
+	public $mandatory_fields = array('createdtime', 'modifiedtime', 'reviewitno');
 
 	public function save_module($module) {
 		if ($this->HasDirectImageField) {

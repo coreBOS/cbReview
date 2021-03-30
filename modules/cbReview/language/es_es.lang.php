@@ -9,9 +9,13 @@
  ************************************************************************************/
 
 $mod_strings = array(
-	'ModuleName' => 'Module Name',
-	'SINGLE_ModuleName' => 'Module Name',
-	'ModuleName ID' => 'Module Name ID',
+	'cbReview' => 'Revisiones',
+	'SINGLE_cbReview' => 'Revisión',
+	'cbReview ID' => 'ID Revisión',
+
+	'LBL_CUSTOM_INFORMATION' => 'Información Personalizada',
+	'LBL_CBREVIEW_INFORMATION' => 'Información Revisión',
+	'LBL_DESCRIPTION_INFORMATION' => 'Descripción',
 
 	'Why' => 'Por qué',
 	'Review No' => 'Número de revisión',
@@ -19,9 +23,5 @@ $mod_strings = array(
 	'When' => 'Cuándo',
 	'What' => 'Que',
 	'Result Type' => 'Tipo de resultado',
-
-	'LBL_CUSTOM_INFORMATION' => 'Información Personalizada',
-	'LBL_MODULEBLOCK_INFORMATION' => 'Información ModuleName',
-	'LBL_DESCRIPTION_INFORMATION' => 'Descripción',
 );
 ?>
