@@ -134,6 +134,29 @@ class cbReview extends CRMEntity {
 	public function vtlib_handler($modulename, $event_type) {
 		if ($event_type == 'module.postinstall') {
 			// Handle post installation actions
+			$modAccounts=Vtiger_Module::getInstance('Accounts');
+			$modContacts=Vtiger_Module::getInstance('Contacts');
+			$modQt=Vtiger_Module::getInstance('Quotes');
+			$modPot=Vtiger_Module::getInstance('Potentials');
+			$modDoc=Vtiger_Module::getInstance('Documents');
+			$modRev=Vtiger_Module::getInstance('cbReview');
+
+			if ($modAccounts) {
+				$modAccounts->setRelatedList($modRev, 'cbReview', array('ADD'), 'get_dependents_list');
+			}
+			if ($modContacts) {
+				$modContacts->setRelatedList($modRev, 'cbReview', array('ADD'), 'get_dependents_list');
+			}
+			if ($modQt) {
+				$modQt->setRelatedList($modRev, 'cbReview', array('ADD'), 'get_dependents_list');
+			}
+			if ($modPot) {
+				$modPot->setRelatedList($modRev, 'cbReview', array('ADD'), 'get_dependents_list');
+			}
+			if ($modDoc) {
+				$modPot->setRelatedList($modRev, 'cbReview', array('ADD'), 'get_dependents_list');
+			}
+
 			$this->setModuleSeqNumber('configure', $modulename, 'review-', '0000001');
 		} elseif ($event_type == 'module.disabled') {
 			// Handle actions when this module is disabled.
