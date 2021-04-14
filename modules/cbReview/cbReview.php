@@ -121,6 +121,41 @@ class cbReview extends CRMEntity {
 	public $mandatory_fields = array('createdtime', 'modifiedtime', 'reviewitno');
 
 	public function save_module($module) {
+		
+		global $log;
+        	global $current_user;
+		$Module = 'ModComments';
+
+		$ObjectValues= array(
+		    'commentcontent' => '<a href="index.php?module=cbReview&action=DetailView&record=' . $this->id .' ">Hoy se ha hecho una revisión</a>',
+		    'assigned_user_id' => vtws_getEntityId('Users').'x'.$current_user->id,
+		    'related_to' => vtws_getEntityId(getSalesEntityType($this->column_fields['whatreview']).'x'.$this->column_fields['whatreview']),
+		);
+
+		try {
+
+		    if (($this->mode === "")) {
+
+			if (!empty($this->column_fields['whatreview'])) {
+
+			    $actual = vtws_create($Module, $ObjectValues, $current_user);
+
+			    if ($actual) {
+
+				$log->fatal('Response', $actual);
+
+			    } else {
+
+				$log->fatal('Fail');
+			    }
+			}
+		    }
+
+		} catch (WebServiceException $e) {
+
+		    $log->fatal($e);
+		}
+		
 		if ($this->HasDirectImageField) {
 			$this->insertIntoAttachment($this->id, $module);
 		}
