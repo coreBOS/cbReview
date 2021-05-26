@@ -9,6 +9,11 @@
  ************************************************************************************/
 require_once 'data/CRMEntity.php';
 require_once 'data/Tracker.php';
+require_once 'include/utils/utils.php';
+require_once 'modules/com_vtiger_workflow/include.inc';
+require_once 'include/events/include.inc';
+require_once 'modules/com_vtiger_workflow/VTWorkflowManager.inc';
+require_once 'modules/com_vtiger_workflow/VTTaskManager.inc';
 
 class cbReview extends CRMEntity {
 	public $table_name = 'vtiger_cbreview';
@@ -121,41 +126,6 @@ class cbReview extends CRMEntity {
 	public $mandatory_fields = array('createdtime', 'modifiedtime', 'reviewitno');
 
 	public function save_module($module) {
-		
-		global $log;
-        	global $current_user;
-		$Module = 'ModComments';
-
-		$ObjectValues= array(
-		    'commentcontent' => '<a href="index.php?module=cbReview&action=DetailView&record=' . $this->id .' ">Hoy se ha hecho una revisión</a>',
-		    'assigned_user_id' => vtws_getEntityId('Users').'x'.$current_user->id,
-		    'related_to' => vtws_getEntityId(getSalesEntityType($this->column_fields['whatreview']).'x'.$this->column_fields['whatreview']),
-		);
-
-		try {
-
-		    if (($this->mode === "")) {
-
-			if (!empty($this->column_fields['whatreview'])) {
-
-			    $actual = vtws_create($Module, $ObjectValues, $current_user);
-
-			    if ($actual) {
-
-				$log->fatal('Response', $actual);
-
-			    } else {
-
-				$log->fatal('Fail');
-			    }
-			}
-		    }
-
-		} catch (WebServiceException $e) {
-
-		    $log->fatal($e);
-		}
-		
 		if ($this->HasDirectImageField) {
 			$this->insertIntoAttachment($this->id, $module);
 		}
@@ -193,6 +163,26 @@ class cbReview extends CRMEntity {
 			}
 
 			$this->setModuleSeqNumber('configure', $modulename, 'review-', '0000001');
+			//Workflows
+			$workflowManager = new VTWorkflowManager($adb);
+			$taskManager = new VTTaskManager($adb);
+			//Review workflow when review is created
+			$reviewWorkflow = $workflowManager->newWorkFlow("cbReview");
+			$reviewWorkflow->test = '[{"fieldname":"whatreview","operation":"is not empty","value":"true:boolean"}]';
+			$reviewWorkflow->description = "Creating comments when making a review";
+			$reviewWorkflow->executionCondition = VTWorkflowManager::$ON_FIRST_SAVE;
+			$reviewWorkflow->defaultworkflow = 1;
+			$workflowManager->save($reviewWorkflow);
+			$task = $taskManager->createTask('CBUpsertTask', $reviewWorkflow->id);
+			$task->active = true;
+			$task->summary = 'Comment creation';
+			$task->field_value_mapping = '[{"fieldname":"assigned_user_id","valuetype":"expression","value":"getCurrentUserId()","fieldmodule":"ModComments"},'
+                		.'{"fieldname":"related_to","valuetype":"fieldname","value":"whatreview","fieldmodule":"ModComments"},'
+                		.'{"fieldname":"commentcontent","valuetype":"expression","value":"concat(\'<a href=\"index.php?module=cbReview&action=DetailView&record=\',getCRMIDFromWSID(id),\'\">Hoy se ha hecho una revisión<\/a>\');","fieldmodule":"ModComments"}]';
+			$task->upsert_module = 'ModComments';
+			$task->test = '';
+			$task->reevaluate = 0;
+			$taskManager->saveTask($task);
 		} elseif ($event_type == 'module.disabled') {
 			// Handle actions when this module is disabled.
 		} elseif ($event_type == 'module.enabled') {
